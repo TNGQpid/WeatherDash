@@ -4,6 +4,11 @@ Hi there! Welcome to my repository about weather! The goal of this repo is to:
 
 Build a containerized module to retrieve live weather data in multiple regions, compile it into GIFs, and continually display it on a hosted website.
 
+<p align="center">
+  <img src="WeatherDemo.gif" width="800">
+</p>
+
+
 ### Things you need to know if you wanted to run this setup yourself:
 1) You'll need to create and safely store an OpenWeather API key.
 
