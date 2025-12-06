@@ -1,0 +1,51 @@
+services:
+  postgres:
+    image: postgres:15
+    restart: always
+    container_name: postgres
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+      POSTGRES_DB: ${DB_NAME}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  metabase:
+    image: metabase/metabase
+    container_name: metabase
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+
+  weather-fetcher:
+    build: ./weather-fetcher
+    restart: unless-stopped
+    env_file: .env
+    depends_on:
+      - postgres
+    volumes:
+      - ./weather-fetcher:/app
+    # Run every 3 hours
+    command: sh -c "while true; do python fetch_weather.py; sleep 1200; done"
+
+  web:
+      build: ./web
+      ports:
+        - "8080:8080"
+      volumes:
+        - radar-data:/app/static/radar
+
+  radar-fetcher:
+    build: ./radar-fetcher
+    volumes:
+      - radar-data:/data
+    environment:
+      - FETCH_INTERVAL=1800  # every 30 minutes
+      - REGIONS=west,east,midwest,south
+
+volumes:
+  radar-data:
+  pgdata:

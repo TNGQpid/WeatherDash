@@ -1,0 +1,4 @@
+requests
+imageio
+Pillow
+beautifulsoup4

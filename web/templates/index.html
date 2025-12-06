@@ -1,0 +1,89 @@
+<!--
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="refresh" content="10">
+  <title>Live Radar Overview</title>
+  <style>
+    body { font-family: sans-serif; margin: 2em; }
+    .radar-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5em;
+    }
+    .radar-card {
+      border: 1px solid #ccc;
+      padding: 1em;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
+    }
+    img {
+      max-width: 100%;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+  <h1>US Radar Overview</h1>
+  <div class="radar-grid">
+    {% for region, gif_path in regions %}
+      <div class="radar-card">
+        <h3>{{ region }}</h3>
+        <img src="{{ gif_path }}" alt="{{ region }} Radar Loop">
+      </div>
+    {% endfor %}
+  </div>
+</body>
+</html>
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Live Radar Overview</title>
+  <style>
+    body { font-family: sans-serif; margin: 2em; }
+    .radar-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5em;
+    }
+    .radar-card {
+      border: 1px solid #ccc;
+      padding: 1em;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
+    }
+    img {
+      max-width: 100%;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+  <h1>US Radar Overview</h1>
+  <div class="radar-grid">
+    {% for region, gif_path in regions %}
+      <div class="radar-card">
+        <h3>{{ region }}</h3>
+        <img src="{{ gif_path }}" alt="{{ region }} Radar Loop">
+      </div>
+    {% endfor %}
+  </div>
+
+  <!-- Auto-replay script -->
+  <script>
+    const gifs = document.querySelectorAll('img');
+    setInterval(() => {
+      gifs.forEach(img => {
+        const src = img.src.split('?')[0];
+        img.src = src + '?t=' + new Date().getTime();
+      });
+    }, 15000); // reload every 16 seconds
+  </script>
+</body>
+</html>
