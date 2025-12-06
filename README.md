@@ -4,6 +4,10 @@ Hi there! Welcome to my repository about weather! The goal of this repo is to:
 
 Build a containerized module to retrieve live weather data in multiple regions, compile it into GIFs, and continually display it on a hosted website.
 
+Here's an example of what the final website front end looks like! (it'll take a few seconds to load the GIF)
+
+Can you see the sunrise and sunset? Can you see the jet stream? (Hint, look for the faster moving air)
+
 <p align="center">
   <img src="WeatherDemo.gif" width="800">
 </p>
